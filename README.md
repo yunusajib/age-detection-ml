@@ -97,7 +97,10 @@ Traditional single-task models require separate networks for each attribute, lea
 
 ### Model Performance Comparison
 
-![Baseline vs Improved](age-detection-ml-fresh/src/visualizations/baseline_vs_improved.png)<div align="center">
+![Baseline vs Improved](age-detection-ml/src/visualizations/baseline_vs_improved.png)<div align="center">
+![Age prediction analysis](age-detection-ml/src/visualizations/age_prediction_analysis.png)<div align="center">
+![Ethnicity Confusion Matrix](age-detection-ml/src/visualizations/ethnicity_confusion_matrix.png)<div align="center">
+![Gender_confusion Matrix](age-detection-ml/src/visualizations/gender_confusion_matrix.png)<div align="center">
 ⭐ Star this repo if you find it helpful!
 Made with ❤️ and lots of ☕
 </div>
