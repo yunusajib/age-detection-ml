@@ -105,14 +105,14 @@ Classes predicted: [0, 1, 2, 3, 4]  ← All classes represented ✅
 
 ### Model Performance Comparison
 
-![Baseline vs Improved](visualizations/baseline_vs_improved.png)
+![Baseline vs Improved](src/visualizations/baseline_vs_improved.png)
 
 ### Confusion Matrices
 
 <table>
   <tr>
-    <td><img src="visualizations/gender_confusion_matrix.png" alt="Gender Confusion Matrix" width="400"/></td>
-    <td><img src="visualizations/ethnicity_confusion_matrix.png" alt="Ethnicity Confusion Matrix" width="400"/></td>
+    <td><img src="src/visualizations/gender_confusion_matrix.png" alt="Gender Confusion Matrix" width="400"/></td>
+    <td><img src="src/visualizations/ethnicity_confusion_matrix.png" alt="Ethnicity Confusion Matrix" width="400"/></td>
   </tr>
   <tr>
     <td align="center"><b>Gender Classification (71.2% accuracy)</b></td>
@@ -122,7 +122,7 @@ Classes predicted: [0, 1, 2, 3, 4]  ← All classes represented ✅
 
 ### Age Prediction Analysis
 
-![Age Prediction Analysis](visualizations/age_prediction_analysis.png)
+![Age Prediction Analysis](src/visualizations/age_prediction_analysis.png)
 
 ### Detailed Test Set Metrics
 
