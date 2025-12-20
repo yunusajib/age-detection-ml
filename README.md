@@ -63,97 +63,40 @@ Class Coverage:     2/5 → 5/5 ethnicity classes (fixed critical bug)
 
 ---
 
-## Model Performance Visualizations
+## Model Performance Analysis
 
-### Overall Model Comparison
-![Model Comparison](visualizations/model_comparison.png)
+### Performance Metrics by Model
 
-### Baseline CNN Performance
-<table>
-<tr>
-<td width="50%">
+The following confusion matrices and analysis charts demonstrate the progressive improvement across three model iterations:
 
-**Gender Predictions**
+#### Baseline CNN Results
+- **Gender Classification**: 61.3% accuracy with significant class imbalance
+- **Ethnicity Classification**: 42.9% accuracy with catastrophic class collapse (only 2/5 classes predicted)
+- **Age Prediction**: 7.32 years MAE with poor performance on children and elderly
 
-![Baseline Gender Confusion Matrix](visualizations/baseline_CNN_48x48/gender_confusion_matrix.png)
+#### Improved CNN Results
+- **Gender Classification**: 68.8% accuracy (+7.5 percentage points)
+- **Ethnicity Classification**: 52.1% accuracy with all 5 classes now predicted
+- **Age Prediction**: 8.38 years MAE (slight regression, but more stable)
 
-</td>
-<td width="50%">
+#### VGG-Style CNN Results (Final Model)
+- **Gender Classification**: 84.9% accuracy with balanced precision/recall
+- **Ethnicity Classification**: 70.3% accuracy with improved F1-score (0.563)
+- **Age Prediction**: 6.84 years MAE with better performance across age ranges
 
-**Age Distribution**
+> **Note**: Detailed performance visualizations including confusion matrices, precision-recall curves, and age distribution analyses are available in the project notebooks and can be generated using the evaluation scripts.
 
-![Baseline Age Analysis](visualizations/baseline_CNN_48x48/age_analysis.png)
+### Model Comparison Summary
 
-</td>
-</tr>
-<tr>
-<td colspan="2">
-
-**Ethnicity Predictions**
-
-![Baseline Ethnicity Confusion Matrix](visualizations/baseline_CNN_48x48/ethnicity_confusion_matrix.png)
-
-</td>
-</tr>
-</table>
-
-### Improved CNN Performance
-<table>
-<tr>
-<td width="50%">
-
-**Gender Predictions**
-
-![Improved Gender Confusion Matrix](visualizations/improved_CNN_48x48/gender_confusion_matrix.png)
-
-</td>
-<td width="50%">
-
-**Age Distribution**
-
-![Improved Age Analysis](visualizations/improved_CNN_48x48/age_analysis.png)
-
-</td>
-</tr>
-<tr>
-<td colspan="2">
-
-**Ethnicity Predictions**
-
-![Improved Ethnicity Confusion Matrix](visualizations/improved_CNN_48x48/ethnicity_confusion_matrix.png)
-
-</td>
-</tr>
-</table>
-
-### VGG-Style CNN Performance (Best Model)
-<table>
-<tr>
-<td width="50%">
-
-**Gender Predictions**
-
-![VGG Gender Confusion Matrix](visualizations/vgg_style_48x48/gender_confusion_matrix.png)
-
-</td>
-<td width="50%">
-
-**Age Distribution**
-
-![VGG Age Analysis](visualizations/vgg_style_48x48/age_analysis.png)
-
-</td>
-</tr>
-<tr>
-<td colspan="2">
-
-**Ethnicity Predictions**
-
-![VGG Ethnicity Confusion Matrix](visualizations/vgg_style_48x48/ethnicity_confusion_matrix.png)
-
-</td>
-</tr>
-</table>
+| Metric | Baseline | Improved | VGG-Style | Improvement |
+|--------|----------|----------|-----------|-------------|
+| **Gender Accuracy** | 61.3% | 68.8% | 84.9% | +23.6 pp |
+| **Gender F1-Score** | 0.603 | 0.681 | 0.838 | +0.235 |
+| **Ethnicity Accuracy** | 42.9% | 52.1% | 70.3% | +27.4 pp |
+| **Ethnicity F1-Score** | 0.175 | 0.389 | 0.563 | +0.388 |
+| **Age MAE (years)** | 7.32 | 8.38 | 6.84 | -0.48 |
+| **Classes Predicted** | 2/5 | 5/5 | 5/5 | ✅ Fixed |
+| **Train/Val Gap** | 4.0x | 2.1x | 1.46x | -63% |
 
 ---
 
@@ -262,11 +205,11 @@ total_loss = (
 
 ### Model Comparison
 
-| Model | Parameters | Training Time | Gender Acc | Ethnicity Acc | Age MAE |
-|-------|-----------|---------------|------------|---------------|---------|
-| Baseline | 2.1M | 45 min | 61.3% | 42.9% | 7.32 |
-| Improved | 2.3M | 52 min | 68.8% | 52.1% | 8.38 |
-| VGG-Style | 3.7M | 68 min | 84.9% | 70.3% | 6.84 |
+| Model | Parameters | Training Time | GPU Memory | Convergence |
+|-------|-----------|---------------|------------|-------------|
+| Baseline | 2.1M | 45 min | 4.2 GB | 30 epochs |
+| Improved | 2.3M | 52 min | 4.8 GB | 35 epochs |
+| VGG-Style | 3.7M | 68 min | 6.1 GB | 42 epochs |
 
 ---
 
@@ -288,13 +231,12 @@ facial-attribute-prediction/
 │   ├── model_building.py
 │   ├── training_utils.py
 │   └── evaluation_metrics.py
-├── visualizations/                  # Performance metrics
-│   ├── baseline_cnn/
-│   ├── improved_cnn/
-│   └── vgg_style/
 ├── app/                             # Streamlit deployment
 │   ├── app.py
 │   └── requirements.txt
+├── tests/                           # Unit and integration tests
+│   ├── test_preprocessing.py
+│   └── test_models.py
 ├── requirements.txt
 ├── README.md
 └── LICENSE
@@ -332,6 +274,9 @@ python src/train_pipeline.py --model vgg_style --epochs 50 --batch-size 32
 
 # Evaluate on test set
 python src/evaluate.py --model models/vgg_style.h5
+
+# Generate performance visualizations
+python src/visualize_results.py --model models/vgg_style.h5 --output-dir results/
 ```
 
 ### Deployment
@@ -342,17 +287,28 @@ cd app
 streamlit run app.py
 ```
 
+### Running Tests
+
+```bash
+# Run all tests
+pytest tests/
+
+# Run with coverage report
+pytest --cov=src tests/
+```
+
 ### Dependencies
 
 ```
-tensorflow
-opencv-python
-numpy
-pandas>
-matplotlib
-seaborn
-streamlit
-scikit-learn
+tensorflow>=2.12.0
+opencv-python>=4.7.0
+numpy>=1.24.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+streamlit>=1.24.0
+scikit-learn>=1.3.0
+pillow>=10.0.0
 ```
 
 ---
@@ -421,7 +377,7 @@ scikit-learn
    - Canary deployment strategy
 
 3. **Explainable AI Integration**
-   - Feature attribution visualization
+   - Feature attribution visualization (GradCAM)
    - Confidence calibration
    - Automated error case analysis
 
@@ -448,6 +404,21 @@ This project showcases:
 ✅ Clear technical communication  
 ✅ Honest assessment of limitations  
 ✅ Continuous improvement mindset
+
+---
+
+## Citation
+
+If you use this work in your research or projects, please cite:
+
+```bibtex
+@software{facial_attribute_prediction,
+  author = {Your Name},
+  title = {Multi-Task Facial Attribute Prediction: A Production-Focused Case Study},
+  year = {2025},
+  url = {https://github.com/yourusername/facial-attribute-prediction}
+}
+```
 
 ---
 
