@@ -1,0 +1,79 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.env
+.venv/
+myenv/
+ENV/
+
+# Virtual environment
+bin/
+include/
+lib/
+lib64
+share/
+pyvenv.cfg
+pip-selfcheck.json
+
+# Data files (LARGE - never commit)
+*.npy
+*.npz
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.csv          # ← Your 159MB CSV files!
+data/raw/
+data/processed/
+
+# Models
+*.pth
+*.pt
+*.keras
+*.onnx
+models/
+checkpoints/
+
+# Logs and outputs
+logs/
+*.log
+runs/
+outputs/
+results/
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS generated files
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
