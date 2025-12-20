@@ -5,7 +5,7 @@
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Live_Demo-red.svg)
-![⚠️ Deployment Limitation](https://img.shields.io/badge/%E2%9A%A0%EF%B8%8F_Deployment-Test_Metrics_%E2%89%A0_Real_World-orange.svg
+![⚠️ Deployment Limitation](https://img.shields.io/badge/%E2%9A%A0%EF%B8%8F_Deployment-Test_Metrics_%E2%89%A0_Real_World-orange.svg)
 
 [🎥 Live Demo](#) | [📊 Documentation](#technical-deep-dive) | [📈 Results](#model-performance) | [⚙️ Installation](#installation--usage)
 
