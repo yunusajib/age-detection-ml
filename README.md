@@ -1,14 +1,10 @@
-# Multi-Task Facial Attribute Prediction
-### A Production-Focused Deep Learning Case Study
-
-![Python](https://img.shields.io/badge/python-3.12-blue.svg)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Streamlit](https://img.shields.io/badge/Streamlit-Live_Demo-red.svg)
-
-[🎥 Live Demo](#) | [📊 Documentation](#technical-deep-dive) | [📈 Results](#model-performance) | [⚙️ Installation](#installation--usage)
-
----
+Multi-Task Facial Attribute Prediction
+A Production-Focused Deep Learning Case Study
+Show Image
+Show Image
+Show Image
+Show Image
+🎥 Live Demo | 📊 Documentation | 📈 Results | ⚙️ Installation
 
 ## Overview
 
