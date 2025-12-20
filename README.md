@@ -1,12 +1,19 @@
-Multi-Task Facial Attribute Prediction
-A Production-Focused Deep Learning Case Study
-Show Image
-Show Image
-Show Image
-Show Image
-🎥 Live Demo | 📊 Documentation | 📈 Results | ⚙️ Installation
+# Multi-Task Facial Attribute Prediction
+### A Production-Focused Deep Learning Case Study
+
+![Python](https://img.shields.io/badge/python-3.12-blue.svg)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Streamlit](https://img.shields.io/badge/Streamlit-Live_Demo-red.svg)
+
+[🎥 Live Demo](#) | [📊 Documentation](#technical-deep-dive) | [📈 Results](#model-performance) | [⚙️ Installation](#installation--usage)
+
+---
 
 ## Overview
+
+
+🚀 [Try the Live Demo](https://age-detection-ml.streamlit.app/) - Test the model with your own images!
 
 This project demonstrates a systematic approach to building production-grade machine learning systems through iterative improvement, rigorous testing, and honest evaluation of real-world performance. I developed three progressively sophisticated deep learning models for simultaneous prediction of age, gender, and ethnicity from facial images, achieving **84.9% gender accuracy** and **70.3% ethnicity accuracy** on test data.
 
