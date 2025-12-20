@@ -66,7 +66,8 @@ Class Coverage:     2/5 → 5/5 ethnicity classes (fixed critical bug)
 ## Model Performance Visualizations
 
 ### Overall Model Comparison
-![Model Comparison](visualizations/model_comparison.png)
+![Model Comparison](visualizations/model_accuracy_comparison.png)
+
 
 ### Baseline CNN Performance
 <table>
