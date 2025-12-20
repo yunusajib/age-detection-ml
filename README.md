@@ -65,8 +65,11 @@ Class Coverage:     2/5 → 5/5 ethnicity classes (fixed critical bug)
 
 ## Model Performance Visualizations
 
-### Overall Model Comparison
-![Model Comparison](visualizations/model_accuracy_comparison.png)
+### Classification Performance
+![Model Accuracy Comparison](visualizations/model_accuracy_comparison.png)
+
+### Age Estimation Performance
+![Age MAE Comparison](visualizations/model_age_mae_comparison.png)
 
 
 ### Baseline CNN Performance
