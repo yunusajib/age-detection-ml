@@ -75,7 +75,7 @@ Class Coverage:     2/5 → 5/5 ethnicity classes (fixed critical bug)
 
 **Gender Predictions**
 
-![Baseline Gender Confusion Matrix](visualizations/Base_CNN_48x48/gender_confusion_matrix.png)
+![Baseline Gender Confusion Matrix](visualizations/Base_CNN_48x48/gender_cm.png)
 
 </td>
 <td width="50%">
@@ -91,7 +91,7 @@ Class Coverage:     2/5 → 5/5 ethnicity classes (fixed critical bug)
 
 **Ethnicity Predictions**
 
-![Baseline Ethnicity Confusion Matrix](visualizations/Base_CNN_48x48/ethnicity_confusion_matrix.png)
+![Baseline Ethnicity Confusion Matrix](visualizations/Base_CNN_48x48/ethnicity_cm.png)
 
 </td>
 </tr>
@@ -104,7 +104,7 @@ Class Coverage:     2/5 → 5/5 ethnicity classes (fixed critical bug)
 
 **Gender Predictions**
 
-![Improved Gender Confusion Matrix](visualizations/Improved_CNN_48x48/gender_confusion_matrix.png)
+![Improved Gender Confusion Matrix](visualizations/Improved_CNN_48x48/gender_cm.png)
 
 </td>
 <td width="50%">
@@ -120,7 +120,7 @@ Class Coverage:     2/5 → 5/5 ethnicity classes (fixed critical bug)
 
 **Ethnicity Predictions**
 
-![Improved Ethnicity Confusion Matrix](visualizations/Improved_CNN_48x48/ethnicity_confusion_matrix.png)
+![Improved Ethnicity Confusion Matrix](visualizations/Improved_CNN_48x48/ethnicity_cm.png)
 
 </td>
 </tr>
@@ -133,7 +133,7 @@ Class Coverage:     2/5 → 5/5 ethnicity classes (fixed critical bug)
 
 **Gender Predictions**
 
-![VGG Gender Confusion Matrix](visualizations/VGG_Style_48x48/gender_confusion_matrix.png)
+![VGG Gender Confusion Matrix](visualizations/VGG_Style_48x48/gender_cm.png)
 
 </td>
 <td width="50%">
@@ -149,7 +149,7 @@ Class Coverage:     2/5 → 5/5 ethnicity classes (fixed critical bug)
 
 **Ethnicity Predictions**
 
-![VGG Ethnicity Confusion Matrix](visualizations/VGG_Style_48x48/ethnicity_confusion_matrix.png)
+![VGG Ethnicity Confusion Matrix](visualizations/VGG_Style_48x48/ethnicity_cm.png)
 
 </td>
 </tr>
