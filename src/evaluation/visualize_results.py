@@ -12,7 +12,7 @@ from src.evaluation.evaluation import evaluate_model
 from src.data.tf_data import load_test_data
 
 # ==================================================
-# ✅ PROJECT ROOT (FIXED)
+# ✅ PROJECT ROOT
 # ==================================================
 PROJECT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "../../")
@@ -20,7 +20,7 @@ PROJECT_ROOT = os.path.abspath(
 sys.path.insert(0, PROJECT_ROOT)
 
 # ==================================================
-# ✅ MODEL PATHS (FIXED)
+# ✅ MODEL PATHS
 # ==================================================
 MODELS = {
     "Base_CNN_48x48": os.path.join(PROJECT_ROOT, "models", "best_model.keras"),
@@ -99,6 +99,52 @@ def plot_age_analysis(y_true, y_pred, save_path):
     print(f"✅ Saved: {save_path}")
 
 # ==================================================
+# 🔥 NEW: MODEL COMPARISON PLOTS
+# ==================================================
+
+
+def plot_model_comparison(all_results):
+    models = list(all_results.keys())
+
+    gender_acc = [all_results[m]["gender"]["accuracy"] for m in models]
+    ethnicity_acc = [all_results[m]["ethnicity"]["accuracy"] for m in models]
+    age_mae = [all_results[m]["age"]["MAE"] for m in models]
+
+    # ---- Accuracy Comparison ----
+    x = np.arange(len(models))
+    width = 0.35
+
+    plt.figure(figsize=(9, 5))
+    plt.bar(x - width/2, gender_acc, width, label="Gender Accuracy")
+    plt.bar(x + width/2, ethnicity_acc, width, label="Ethnicity Accuracy")
+
+    plt.xticks(x, models, rotation=15)
+    plt.ylabel("Accuracy")
+    plt.title("Model Comparison: Classification Accuracy")
+    plt.legend()
+
+    acc_path = os.path.join(BASE_VIZ_DIR, "model_accuracy_comparison.png")
+    plt.tight_layout()
+    plt.savefig(acc_path, dpi=300)
+    plt.close()
+
+    print(f"✅ Saved: {acc_path}")
+
+    # ---- Age MAE Comparison ----
+    plt.figure(figsize=(8, 4))
+    plt.bar(models, age_mae)
+    plt.ylabel("MAE (years)")
+    plt.title("Model Comparison: Age Prediction Error")
+    plt.xticks(rotation=15)
+
+    mae_path = os.path.join(BASE_VIZ_DIR, "model_age_mae_comparison.png")
+    plt.tight_layout()
+    plt.savefig(mae_path, dpi=300)
+    plt.close()
+
+    print(f"✅ Saved: {mae_path}")
+
+# ==================================================
 # MAIN
 # ==================================================
 
@@ -106,6 +152,8 @@ def plot_age_analysis(y_true, y_pred, save_path):
 def main():
     print("\n📥 Loading test dataset...")
     test_ds = load_test_data(batch_size=32)
+
+    all_results = {}
 
     for model_name, model_path in MODELS.items():
         print("\n" + "#" * 70)
@@ -120,12 +168,13 @@ def main():
 
         model = keras.models.load_model(model_path, compile=False)
         results = evaluate_model(model, test_ds)
+        all_results[model_name] = results
 
-        # Create per-model directory
+        # Per-model directory
         model_viz_dir = os.path.join(BASE_VIZ_DIR, model_name)
         os.makedirs(model_viz_dir, exist_ok=True)
 
-        # Gender
+        # Gender CM
         plot_confusion_matrix(
             results["gender"]["confusion_matrix"],
             labels=["Male", "Female"],
@@ -134,7 +183,7 @@ def main():
             accuracy=results["gender"]["accuracy"],
         )
 
-        # Ethnicity
+        # Ethnicity CM
         plot_confusion_matrix(
             results["ethnicity"]["confusion_matrix"],
             labels=[f"Class {i}" for i in range(
@@ -152,7 +201,10 @@ def main():
             save_path=os.path.join(model_viz_dir, "age_analysis.png"),
         )
 
-    print("\n🎉 ALL MODELS VISUALIZED")
+    # 🔥 NEW: comparison plots
+    plot_model_comparison(all_results)
+
+    print("\n🎉 ALL MODELS VISUALIZED & COMPARED")
     print(f"📁 Output directory: {BASE_VIZ_DIR}")
 
 
