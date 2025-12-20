@@ -5,6 +5,7 @@
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Live_Demo-red.svg)
+![⚠️ Deployment Limitation](https://img.shields.io/badge/%E2%9A%A0%EF%B8%8F_Deployment-Test_Metrics_%E2%89%A0_Real_World-orange.svg
 
 [🎥 Live Demo](#) | [📊 Documentation](#technical-deep-dive) | [📈 Results](#model-performance) | [⚙️ Installation](#installation--usage)
 
@@ -12,18 +13,33 @@
 
 ## Overview
 
+🚀 Try the Live Demo
+ - Test the model with your own images!
 
-🚀 [Try the Live Demo](https://age-detection-ml.streamlit.app/) - Test the model with your own images!
+This project demonstrates a systematic approach to building production-grade machine learning systems through iterative improvement, rigorous testing, and honest evaluation of real-world performance. I developed three progressively sophisticated deep learning models for simultaneous prediction of age, gender, and ethnicity from facial images, achieving 84.9% gender accuracy and 70.3% ethnicity accuracy on test data.
 
-This project demonstrates a systematic approach to building production-grade machine learning systems through iterative improvement, rigorous testing, and honest evaluation of real-world performance. I developed three progressively sophisticated deep learning models for simultaneous prediction of age, gender, and ethnicity from facial images, achieving **84.9% gender accuracy** and **70.3% ethnicity accuracy** on test data.
+What makes this project valuable:
 
-**What makes this project valuable:**
+Systematic methodology: Clear progression from baseline to production-grade models
 
-- **Systematic methodology**: Clear progression from baseline to production-grade models
-- **Problem-solving documentation**: Detailed solutions to class collapse and overfitting
-- **Real-world validation**: Honest assessment of the gap between test metrics and deployment performance
-- **Production mindset**: Focus on practical deployment challenges and limitations
+Problem-solving documentation: Detailed solutions to class collapse and overfitting
 
+Real-world validation: Honest assessment of the gap between test metrics and deployment performance
+
+Deployment insights: Highlights why academic performance may not translate directly to real-world usage
+
+Production mindset: Focus on practical deployment challenges and limitations
+
+⚠️ Note on Deployment:
+Even though the models perform well on the test dataset, real-world testing revealed critical gaps:
+
+Gender predictions are biased toward the dominant class (Male)
+
+Ethnicity predictions often collapse to a few classes (0 or 1)
+
+Age predictions tend to underestimate real ages
+
+These issues are caused by dataset biases, preprocessing mismatches, limited demographic coverage, and out-of-distribution inputs. They illustrate the difference between test metrics and real-world deployment performance.
 ---
 
 ## Key Results
