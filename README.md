@@ -9,7 +9,7 @@ Production Deep Learning System for Age, Gender, and Ethnicity Estimation
 
 ---
 
-> 🎯 **HIRING MANAGERS:** [**Try the live demo**](https://your-demo-url.streamlit.app) in 30 seconds.  
+> 🎯 **HIRING MANAGERS:** [**Try the live demo**](https://age-detection-ml.streamlit.app/) in 30 seconds.  
 > Upload a facial image and watch the model predict age, gender, and ethnicity simultaneously.  
 > Then come back to see the engineering behind it—including honest lessons from deployment failures.
 
