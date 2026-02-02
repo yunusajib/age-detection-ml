@@ -18,66 +18,32 @@ CLASS_LABELS = {
 }
 
 # -----------------------------
-# Load model with compatibility fixes
+# Load model
 # -----------------------------
 @st.cache_resource
 def load_model(path):
-    """Load model with multiple fallback strategies"""
-    
-    # Strategy 1: Try with safe_mode=False (Keras 3.x compatibility)
+    """Load Keras 3.x model"""
     try:
-        st.info("Loading model with safe_mode=False...")
-        model = keras.models.load_model(path, compile=False, safe_mode=False)
-        st.success("✅ Model loaded successfully with safe_mode=False!")
-        return model
-    except TypeError as e:
-        st.warning(f"safe_mode parameter not supported, trying without it...")
+        return keras.models.load_model(path, compile=False)
     except Exception as e:
-        st.warning(f"Failed with safe_mode=False: {str(e)[:100]}")
-    
-    # Strategy 2: Try legacy H5 format loading
-    try:
-        st.info("Trying legacy H5 format loading...")
-        model = tf.keras.models.load_model(path, compile=False)
-        st.success("✅ Model loaded with legacy method!")
-        return model
-    except Exception as e:
-        st.warning(f"Legacy loading failed: {str(e)[:100]}")
-    
-    # Strategy 3: Try with custom objects (empty dict can help with some compatibility issues)
-    try:
-        st.info("Trying with custom_objects parameter...")
-        model = keras.models.load_model(path, compile=False, custom_objects={})
-        st.success("✅ Model loaded with custom_objects!")
-        return model
-    except Exception as e:
-        st.error(f"All loading strategies failed!")
-        st.error(f"Model path: {path}")
-        st.error(f"Model exists: {os.path.exists(path)}")
-        st.error(f"Final error: {e}")
+        st.error(f"Error loading model: {e}")
+        st.error(f"TensorFlow version: {tf.__version__}")
         raise
 
 # Load model
-try:
-    model = load_model(MODEL_PATH)
-except Exception as e:
-    st.error("❌ Critical error: Failed to load model after all attempts.")
-    st.error("This usually means the model was saved with a different TensorFlow/Keras version.")
-    st.error(f"Current TensorFlow version: {tf.__version__}")
-    st.error(f"Current Keras version: {keras.__version__}")
-    st.info("💡 Recommendation: Re-save your model with TensorFlow 2.15.0 or update requirements.txt to match the training version.")
-    st.stop()
+model = load_model(MODEL_PATH)
+st.success(f"✅ Model loaded successfully! (TensorFlow {tf.__version__})")
 
 # -----------------------------
 # Preprocess uploaded image
 # -----------------------------
 def preprocess_uploaded_image(img: Image.Image):
     """Convert image to model input format"""
-    img = img.convert("RGB")            # ensure 3 channels
-    img = img.resize((48, 48))          # resize to 48x48
+    img = img.convert("RGB")
+    img = img.resize((48, 48))
     img_array = np.array(img).astype(np.float32)
-    img_array /= 255.0                  # normalize to [0, 1]
-    img_array = np.expand_dims(img_array, axis=0)  # add batch dimension
+    img_array /= 255.0
+    img_array = np.expand_dims(img_array, axis=0)
     return img_array
 
 # -----------------------------
@@ -88,12 +54,13 @@ def predict(model, img: Image.Image):
     img_array = preprocess_uploaded_image(img)
     preds = model.predict(img_array, verbose=0)
     
-    # Handle different output formats (dict vs list)
+    # Handle different output formats
     if isinstance(preds, dict):
         age_pred = preds["age_output"][0][0]
         gender_pred = np.argmax(preds["gender_output"][0])
         ethnicity_pred = np.argmax(preds["ethnicity_output"][0])
     else:
+        # preds is a list of arrays
         age_pred = preds[0][0][0]
         gender_pred = np.argmax(preds[1][0])
         ethnicity_pred = np.argmax(preds[2][0])
@@ -127,7 +94,7 @@ if uploaded_file is not None:
             
             st.success("✨ Prediction Complete!")
             
-            # Display results in nice columns
+            # Display results in columns
             col1, col2, col3 = st.columns(3)
             
             with col1:
@@ -150,7 +117,6 @@ if uploaded_file is not None:
                 
         except Exception as e:
             st.error(f"❌ Prediction failed: {e}")
-            st.error("Please try uploading a different image or contact support.")
 
 # Footer
 st.divider()
